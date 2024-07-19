@@ -3,3 +3,5 @@ pyspark
 pyarrow
 seaborn 
 black
+scikit-learn 
+xgboost
