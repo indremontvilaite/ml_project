@@ -2,3 +2,4 @@ pandas
 pyspark
 pyarrow
 seaborn 
+black
