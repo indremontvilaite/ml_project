@@ -1,3 +1,4 @@
+*.parquet
 data.parquet
 data_clean1.parquet
 ml_project/
