@@ -5,3 +5,4 @@ seaborn
 black
 scikit-learn 
 xgboost
+imblearn
