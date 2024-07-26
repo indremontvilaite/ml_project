@@ -25,14 +25,18 @@ EDA goals are:
 
 - Data cleaning. Data was cleaned by rounding timestamps to minutes and removing dublicated rows by subset of categorical attributes since the mail goal is to predict interrupted connections so intteruption and event before intterption should be the most valuable.
 - Correlation across the columns. There was checked if there are identical columns in dataset and the correlation between them. As you can se from Descriptive statistics plot, there are some replicated patterns in attributes statistics. 
+
 ![Desc](./pictures/desr_plot.png)
 Besides, there no duplicated collumns in the dataset (as it looks like for the first sight), however, some collumns have very high or even perfect correlation equal to 1. This indicates multicollinearity which is problem for model explainability(for Logistic regression model). Around 40 columns were removed from the dataset due to high correlation (over 0.99).
+
 ***Correllation matric of numeric attribus*** 
 ![Corr](./pictures/corr.png)
 - Missing values. There are a lot of missing values in dataset, some attributes reaching over 99% of missings. The differences across missing values by event type is analysed to check if some missing values can be related to event type, like interruption.
+
 ***Missing values distribution differences between Interrupted and Continuous event*** 
 ![Missings](./pictures/missing_diff.png)
 The results are showing that there are different distributions in missing values between event type, but any column had missing values just in one category. From descriptive statistics analysis, there is observed that the direffences between mean and median are quite huge for some attributtes even after outliers replacement with less extreme values. Due to that reason, meadian is selected as a value for missings imputing.
+
 ***Mean and Median values plot for numeric attributes***
 ![Mean median](./pictures/mean_median.png)
 - Data balanse. The dataset is highly inbalance be event time. The interruptions consist 1.4% of original dataset and 6.4% of cleaned dataset. This suggest that data balancing techniques should be used while modeling.
