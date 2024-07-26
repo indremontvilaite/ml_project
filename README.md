@@ -37,5 +37,5 @@ Several metrics were use for models' evaluation and comparison. 2 main metrics f
 Bayes optimisation was selected for XGBoost hyperparameter tuning since it should outperfom other optimisation methods as GridSearchCV or RandomSeachCV.
 
 #### Experiment Tracking
-One of the tools to registter models and track experiments is MLFlow. This part was omitted due to time constrains and technology constrains.
+Git as version control system is used here. Going further, VSC is providing DVC extension for model tracking. Another tools to registter models and track experiments, that I have expierience working with, is MLFlow. This part was omitted due to time constrains and technology constrains.
 

@@ -1,3 +1,9 @@
+import pandas as pd
+from typing import List
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix, roc_curve, roc_auc_score
+
 def are_columns_identical(df, col1, col2):
     return (df[col1] == df[col2]).all()
 
@@ -11,37 +17,22 @@ def find_identical_columns(df):
                 identical_columns.append((columns[i], columns[j]))
     return identical_columns
 
-def plot_multiple_lines(
-    data:pd.DataFrame,
-    x_col:List,
-    y_cols:List,
-    title:str="Multiple Line Plot",
-    xlabel:str="X-axis",
-    ylabel:str="Y-axis",
-    rotation:int=45,
-)->None:
-    """
-    Plots multiple lines using Seaborn's lineplot function.
+def model_metrics(y_test, y_pred,  y_pred_proba):
+    """ Model evaluation metrics for classification model"""
 
-    Parameters:
-    - data: DataFrame containing the data.
-    - x_col: Column name for the x-axis.
-    - y_cols: List of column names for the y-axis.
-    - title: Title of the plot (default 'Multiple Line Plot').
-    - xlabel: Label for the x-axis (default 'X-axis').
-    - ylabel: Label for the y-axis (default 'Y-axis').
-    - rotation: Rotation angle for the x-axis labels (default 45 degrees).
-    """
-    plt.figure(figsize=(10, 6))
+    # Confusion matrix
+    cm = confusion_matrix(y_test, y_pred)
+    print("Confusion Matrix:")
+    print(cm)
 
-    for y_col in y_cols:
-        sns.lineplot(data=data, x=x_col, y=y_col, label=y_col)
+    recall = cm[0,1]/(cm[0,1]+cm[1,1])
+    print(f"Recall: {recall:.2f}")
 
-    plt.title(title)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.semilogy()
-    plt.xticks(rotation=rotation)
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+    precision = cm[0,0]/(cm[0,0]+cm[0,1])
+    print(f"Precision: {precision:.2f}")
+    # ROC Curve
+    fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+    roc_auc = roc_auc_score(y_test, y_pred_proba)
+    print(f"ROC AUC: {roc_auc}")
+
+    return fpr, tpr, roc_auc
