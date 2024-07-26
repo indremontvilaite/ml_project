@@ -25,16 +25,19 @@ EDA goals are:
 
 - Data cleaning. Data was cleaned by rounding timestamps to minutes and removing dublicated rows by subset of categorical attributes since the mail goal is to predict interrupted connections so intteruption and event before intterption should be the most valuable.
 - Correlation across the columns. There was checked if there are identical columns in dataset and the correlation between them. As you can se from Descriptive statistics plot, there are some replicated patterns in attributes statistics. 
-[Desc](./pictures/desr_plot.png)
-Besides, there no duplicated collumns in the dataset (as it looks like for the first sight), however, some collumns have very high or even perfect correlation equal to 1. This indicates multicollinearity which is problem for model explainability(for Logistic regression model). Around 40 columns were removed from the dataset due to high correlation (over 0.99). 
- [Corr](./pictures/corr.png "Correllation matric of numeric attribus")
-- Missing values. There are a lot of missing values in dataset, some attributes reaching over 99% of missings. The differences across missing values by event type is analysed to check if some missing values can be related to event type, like interruption. 
-![Missings](./pictures/missing_diff.png "Missing values distribution differences between Interrupted and Continuous event")
+![Desc](./pictures/desr_plot.png)
+Besides, there no duplicated collumns in the dataset (as it looks like for the first sight), however, some collumns have very high or even perfect correlation equal to 1. This indicates multicollinearity which is problem for model explainability(for Logistic regression model). Around 40 columns were removed from the dataset due to high correlation (over 0.99).
+***Correllation matric of numeric attribus*** 
+![Corr](./pictures/corr.png)
+- Missing values. There are a lot of missing values in dataset, some attributes reaching over 99% of missings. The differences across missing values by event type is analysed to check if some missing values can be related to event type, like interruption.
+***Missing values distribution differences between Interrupted and Continuous event*** 
+![Missings](./pictures/missing_diff.png)
 The results are showing that there are different distributions in missing values between event type, but any column had missing values just in one category. From descriptive statistics analysis, there is observed that the direffences between mean and median are quite huge for some attributtes even after outliers replacement with less extreme values. Due to that reason, meadian is selected as a value for missings imputing.
-[Mean median](./pictures/mean_median.png "Mean and Median values plot for numeric attributes")
+***Mean and Median values plot for numeric attributes***
+![Mean median](./pictures/mean_median.png)
 - Data balanse. The dataset is highly inbalance be event time. The interruptions consist 1.4% of original dataset and 6.4% of cleaned dataset. This suggest that data balancing techniques should be used while modeling.
 - Outliers were replaced by less extreme values, 0.95 and 0.05 percentiles. Even after the hanling of outliers, we can se that the data is asymetric by the difference between average and median values.
-
+---
 ### Feature Engineering:
 Here are methods for selecting and transforming relevant features.
 #### Handling missing values
@@ -51,12 +54,14 @@ Since the dataset is highly imbalanced, SMOTE approach was chosen to balance tha
 After the data preprocesing(including imputing missing values, scaling and OneHotEncoding), data was trained on 2 models.
 #### Hyperparameter tuning methods and their outcomes
 Bayes optimisation was selected for XGBoost hyperparameter tuning since it should outperfom other optimisation methods as GridSearchCV or RandomSeachCV.
+---
 #### Model selection and justification
 **Logistic regression** model was chosen as a baseline model for classification problem. The Logistic regression is one of the simpliest models used for classification problem. It is relatively simple to compute and odds ratios show features impact to the model output (if multicollinearity is not present).
 As a state-of-art model, **XGBoost model** was chosen since it outperforms other models by some researches and are suitable for time series data as well. 
 #### Model evaluation
-Several metrics were use for models' evaluation and comparison. 2 main metrics for classification problem are comfusion matrix and ROC curve. Since the data is imbalanced and there should be more important to correctly forecast cased than a process is interrupted istead of continuous event, the recall is chosen as the most important metric for model comparison. 
-**|Model name | ROC AUC | Recall | Precision|**
+Several metrics were use for models' evaluation and comparison. 2 main metrics for classification problem are comfusion matrix and ROC curve. Since the data is imbalanced and there should be more important to correctly forecast cased than a process is interrupted istead of continuous event, the recall is chosen as the most important metric for model comparison.
+
+|Model name | ROC AUC | Recall | Precision|
 |----------------------------------------|----------|----------|----------|
 |Logistic regression	|0.88|	0.81|	0.75|
 |XGBoost basic	|0.94 |	0.50 |	0.96 |
