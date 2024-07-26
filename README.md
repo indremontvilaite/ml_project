@@ -29,7 +29,6 @@ EDA goals are:
 ![Desc](./pictures/desr_plot.png)
 Besides, there no duplicated collumns in the dataset (as it looks like for the first sight), however, some collumns have very high or even perfect correlation equal to 1. This indicates multicollinearity which is problem for model explainability(for Logistic regression model). Around 40 columns were removed from the dataset due to high correlation (over 0.99).
 
-***Correllation matric of numeric attribus*** 
 ![Corr](./pictures/corr.png)
 - Missing values. There are a lot of missing values in dataset, some attributes reaching over 99% of missings. The differences across missing values by event type is analysed to check if some missing values can be related to event type, like interruption.
 
@@ -56,12 +55,13 @@ Standard scaler is used for numerical attributes.
 Besides the steps taken in data cleaning part(datetime attribe aggregation to minutes), new features generation was skip due to time constrains. Having more time, the first step would be to include laged attributes since the dependent attribute defines the status of the process, so previous information might be useful in forecasting the current state.
 #### Handling imbalanced data
 Since the dataset is highly imbalanced, SMOTE approach was chosen to balance tha data by oversampling the minority class while creating syntetic observations.
+
+---
 ### Model Training and Development:
 After the data preprocesing(including imputing missing values, scaling and OneHotEncoding), data was trained on 2 models.
 #### Hyperparameter tuning methods and their outcomes
 Bayes optimisation was selected for XGBoost hyperparameter tuning since it should outperfom other optimisation methods as GridSearchCV or RandomSeachCV.
 
----
 #### Model selection and justification
 **Logistic regression** model was chosen as a baseline model for classification problem. The Logistic regression is one of the simpliest models used for classification problem. It is relatively simple to compute and odds ratios show features impact to the model output (if multicollinearity is not present).
 As a state-of-art model, **XGBoost model** was chosen since it outperforms other models by some researches and are suitable for time series data as well. 
