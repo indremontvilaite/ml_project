@@ -38,6 +38,7 @@ Besides, there no duplicated collumns in the dataset (as it looks like for the f
 The results are showing that there are different distributions in missing values between event type, but any column had missing values just in one category. From descriptive statistics analysis, there is observed that the direffences between mean and median are quite huge for some attributtes even after outliers replacement with less extreme values. Due to that reason, meadian is selected as a value for missings imputing.
 
 ***Mean and Median values plot for numeric attributes***
+
 ![Mean median](./pictures/mean_median.png)
 - Data balanse. The dataset is highly inbalance be event time. The interruptions consist 1.4% of original dataset and 6.4% of cleaned dataset. This suggest that data balancing techniques should be used while modeling.
 - Outliers were replaced by less extreme values, 0.95 and 0.05 percentiles. Even after the hanling of outliers, we can se that the data is asymetric by the difference between average and median values.
@@ -58,6 +59,7 @@ Since the dataset is highly imbalanced, SMOTE approach was chosen to balance tha
 After the data preprocesing(including imputing missing values, scaling and OneHotEncoding), data was trained on 2 models.
 #### Hyperparameter tuning methods and their outcomes
 Bayes optimisation was selected for XGBoost hyperparameter tuning since it should outperfom other optimisation methods as GridSearchCV or RandomSeachCV.
+
 ---
 #### Model selection and justification
 **Logistic regression** model was chosen as a baseline model for classification problem. The Logistic regression is one of the simpliest models used for classification problem. It is relatively simple to compute and odds ratios show features impact to the model output (if multicollinearity is not present).
