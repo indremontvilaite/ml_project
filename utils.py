@@ -40,19 +40,21 @@ def model_metrics(y_test, y_pred, y_pred_proba):
 
     return fpr, tpr, roc_auc
 
+
 def extract_number(col_name):
-    match = re.search(r'\d+', col_name)
+    match = re.search(r"\d+", col_name)
     return int(match.group()) if match else None
 
+
 def plot_multiple_lines(
-    data:pd.DataFrame,
-    x_col:List,
-    y_cols:List,
-    title:str="Multiple Line Plot",
-    xlabel:str="X-axis",
-    ylabel:str="Y-axis",
-    rotation:int=45,
-)->None:
+    data: pd.DataFrame,
+    x_col: List,
+    y_cols: List,
+    title: str = "Multiple Line Plot",
+    xlabel: str = "X-axis",
+    ylabel: str = "Y-axis",
+    rotation: int = 45,
+) -> None:
     """
     Plots multiple lines using Seaborn's lineplot function.
 
@@ -73,8 +75,8 @@ def plot_multiple_lines(
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.yscale('log')
+    plt.yscale("log")
     plt.xticks(rotation=rotation)
-    plt.legend(ncol=12, loc='upper center')
+    plt.legend(ncol=12, loc="upper center")
     plt.grid(False)
     plt.show()
